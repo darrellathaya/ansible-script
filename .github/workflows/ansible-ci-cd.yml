@@ -1,0 +1,40 @@
+name: Ansible HTTPD Status Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-httpd-status:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python for Ansible
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install Ansible
+      run: |
+        python -m pip install --upgrade pip
+        pip install ansible
+
+    - name: Install SSH dependencies
+      run: |
+        sudo apt-get install -y openssh-client
+
+    - name: Configure SSH keys for authentication
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 192.168.56.106 >> ~/.ssh/known_hosts
+        ssh-keyscan -H 192.168.56.110 >> ~/.ssh/known_hosts
+
+    - name: Run Ansible Playbook to Check HTTPD
+      run: |
+        ansible-playbook -i hosts.ini check_httpd.yml
