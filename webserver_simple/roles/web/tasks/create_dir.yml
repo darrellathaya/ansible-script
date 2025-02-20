@@ -1,0 +1,13 @@
+---
+- name: Creating the directories needed for Blog App
+  ansible.builtin.file:
+    path: /home/student/Projects/blog-app{{ item[0] }}/{{ item [1] }}
+    state: directory
+    owner: student
+    mode: '0755'
+  loop:
+    - [1, ""]
+    - [1, "templates"]
+    - [1, "instance"]
+  # - [2, ""] for additional instances
+  become: yes

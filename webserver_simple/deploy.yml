@@ -1,0 +1,24 @@
+---
+- name: Applying Container Environments
+  hosts: blogs
+  remote_user: root
+  roles:
+  - common
+
+- name: Creating Webserver Environments
+  hosts: blogs
+  remote_user: root
+  roles:
+  - web
+
+#- name: Deploying Webserver
+#  hosts: blogs
+#  remote_user: root
+#  roles:
+#  - web
+
+- name: Deploying Database
+  hosts: blogs
+  remote_user: root
+  roles:
+  - db

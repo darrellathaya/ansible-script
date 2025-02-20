@@ -1,0 +1,12 @@
+---
+- name: Copying the app.py
+  ansible.builtin.template:
+    src: templates/app.py.j2
+    dest: /home/student/Projects/blog-app{{ item }}/app.py
+    owner: student
+    mode: '0644'
+  loop:
+    - 1
+    #- 2
+    # Add the sequence below
+  become: yes  

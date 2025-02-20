@@ -1,0 +1,21 @@
+---
+- name: Checking running PostgreSQL Database
+  ansible.builtin.command:
+    cmd: "podman stop blog-db{{ item }} \ podman rm blog-db{{ item }}"
+  register: container_status
+  changed_when: false
+  failed_when: false
+  loop:
+    - 1
+    #- 2
+    # Continue sequence below
+  become: yes
+
+- name: Running the PostgreSQL as Database
+  ansible.builtin.command: 
+   cmd: "podman run -d --replace --name blog-db{{ item }} -e POSTGRES_DB=blog-db{{ item }} -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -v blog-data:/var/lib/postgresql/data -p 543{{ item }}:5432 docker.io/library/postgres:14-alpine"
+  loop:
+    - 1 
+    #- 2
+    # Add sequence below
+  become: yes

@@ -1,0 +1,12 @@
+---
+- name: Copying the requirements.txt
+  ansible.builtin.template:
+    src: templates/requirements.txt.j2
+    dest: /home/student/Projects/blog-app{{ item }}/requirements.txt
+    owner: student
+    mode: '0644'
+  loop:
+    - 1
+    #- 2
+    # Add the sequence below
+  become: yes  

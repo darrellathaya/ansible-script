@@ -1,0 +1,12 @@
+---
+- name: Copying the blog.db
+  ansible.builtin.template:
+    src: templates/blog.db.j2
+    dest: /home/student/Projects/blog-app{{ item }}/instance/blog.db
+    owner: student
+    mode: '0644'
+  loop:
+    - 1
+    #- 2
+    # Add the sequence below
+  become: yes  

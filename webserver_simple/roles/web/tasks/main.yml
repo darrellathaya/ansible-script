@@ -1,0 +1,9 @@
+---
+- include: create_dir.yml
+- include: create_app.py.yml
+- include: create_index.html.yml
+- include: create_create.html.yml
+- include: create_requirements.txt.yml
+- include: create_dockerfile.yml
+- include: create_blog.db.yml
+- include: run_webserver.yml

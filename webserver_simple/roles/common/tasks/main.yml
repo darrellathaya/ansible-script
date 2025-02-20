@@ -1,0 +1,21 @@
+- name: Installing Python
+  ansible.builtin.package:
+    name: 
+      - python3
+      - python3-pip
+    state: latest
+  become: yes
+ 
+- name: Installing Flask
+  pip:
+    name: flask
+    state: latest
+    executable: pip
+  become: yes
+
+- name: Installing Podman
+  ansible.builtin.package:
+    name: podman
+    state: present
+  become: yes
+ 

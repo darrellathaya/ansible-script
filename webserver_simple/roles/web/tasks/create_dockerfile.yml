@@ -1,0 +1,12 @@
+---
+- name: Copying the Dockerfile
+  ansible.builtin.template:
+    src: templates/Dockerfile.j2
+    dest: /home/student/Projects/blog-app{{ item }}/Dockerfile
+    owner: student
+    mode: '0644'
+  loop:
+    - 1
+    #- 2
+    # Add the sequence below
+  become: yes  

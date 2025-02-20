@@ -1,0 +1,12 @@
+---
+- name: Copying the create.html
+  copy:
+    src: templates/create.html.j2
+    dest: /home/student/Projects/blog-app{{ item }}/templates/create.html
+    owner: student
+    mode: '0644'
+  loop:
+    - 1
+    #- 2
+    # Add the sequence below
+  become: yes  

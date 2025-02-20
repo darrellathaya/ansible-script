@@ -1,0 +1,29 @@
+- name: Building Image for the Blog App
+  ansible.builtin.command:
+    cmd: "podman build -t blog-app{{ item }} /home/student/Projects/blog-app{{ item }}"
+  loop:
+    - 1
+    #- 2
+    # Continue the sequence below
+  become: yes
+
+- name: Checking running Blog App Container
+  ansible.builtin.command:
+    cmd: "podman stop blog-app{{ item }} \ podman rm blog-app{{ item }}"
+  register: container_status
+  changed_when: false
+  failed_when: false
+  loop:
+    - 1
+    #- 2
+    # Continue the sequence below
+  become: yes
+
+- name: Running the Blog App Container
+  ansible.builtin.command:
+    cmd: "podman run -d --replace --name blog-app{{ item }} -p 500{{ item }}:5000 --env DB_HOST=host.containers.internal --env DB_NAME=blog_db --env DB_USER=postgres --env DB_PASSWORD=postgres blog-app{{ item }}"
+  loop:
+    - 1
+    #- 2
+    # Continue the sequence below
+  become: yes
