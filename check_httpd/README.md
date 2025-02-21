@@ -1,3 +1,9 @@
+
+
+    /check_httpd
+        ├── check_httpd.yml
+        ├── hosts.ini
+
 # Add User or Group Permissions
 ## 1. Edit the Sudoers File
   Login on the managed node
